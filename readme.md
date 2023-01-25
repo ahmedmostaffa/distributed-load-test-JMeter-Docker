@@ -51,3 +51,13 @@ docker exec -it master /bin/bash
 ``` 
 jmeter -n -t /jmeter/apache-jmeter-3.3/bin/JMeter-test-script.jmx -l report/results.csv -f -e -o report/html -R172.17.0.3,172.17.0.4,172.17.0.5,172.17.0.6,172.17.0.7,172.17.0.8,172.17.0.9,172.17.0.10,172.17.0.11,172.17.0.12
 ```
+## Exporting HTML, CSV Report.
+* at the end of the blog you can read and access html, csv reports at your local machine through the below command.
+
+```
+docker cp master:/path/report/* ~/Desktop/reporting
+```
+
+
+
+
