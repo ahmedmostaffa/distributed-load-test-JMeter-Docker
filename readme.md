@@ -10,9 +10,9 @@ As you see in the above JMeter architecture (master, slaves), through this docum
 * 1-  ensure the docker engine is successfully installed on your local machine
 * 2- Run the below commands consecutively.
 ```Docker
-docker run -dit --name slave01 vinsdocker/jmserver /bin/bash
-docker run -dit --name slave02 vinsdocker/jmserver /bin/bash
-docker run -dit --name slave03 vinsdocker/jmserver /bin/bash
+docker run -dit --name slave01 vinsdocker/jmserver:latest /bin/bash
+docker run -dit --name slave02 vinsdocker/jmserver:latest /bin/bash
+docker run -dit --name slave03 vinsdocker/jmserver:latest /bin/bash
 .
 .
 ```
@@ -20,7 +20,7 @@ The docker engine will pull the images from docker hub and create an ***n*** con
 
 * 3- Run the below command to create a container for JMeter master. 
 ``` Docker
-docker run -dit --name master vinsdocker/jmmaster /bin/bash
+docker run -dit --name master vinsdocker/jmmaster:latest /bin/bash
 ```
 * 4- To check if all containers are running successfully, type the below command.
 
@@ -52,7 +52,7 @@ docker exec -it master /bin/bash
 jmeter -n -t /jmeter/apache-jmeter-3.3/bin/JMeter-test-script.jmx -l report/results.csv -f -e -o report/html -R172.17.0.3,172.17.0.4,172.17.0.5,172.17.0.6,172.17.0.7,172.17.0.8,172.17.0.9,172.17.0.10,172.17.0.11,172.17.0.12
 ```
 ## Exporting HTML, CSV Report.
-* at the end of the blog you can read and access html, csv reports at your local machine through the below command.
+* at the end of the blog you can read and access .html, .csv reports on your local machine through the below command.
 
 ```
 docker cp master:/path/report/* ~/Desktop/reporting

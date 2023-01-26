@@ -4,8 +4,8 @@ services:
   
   slave:
     image: vinsdocker/jmserver:latest    
-    #container_name: jmeter-slave
-    #script:
+    # container_name: jmeter-slave
+    # script:
       # Generate random number from 1 to 10:
     #  - let MR_ID=$((1 + RANDOM % 10))
     depends_on:
