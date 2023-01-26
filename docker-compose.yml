@@ -1,54 +1,19 @@
-version: '2'
-
-# https://docs.docker.com/compose/compose-file/
-# http://www.testautomationguru.com/jmeter-distributed-load-testing-using-docker/
-# srivaths.blogspot.com/2014/08/distrubuted-jmeter-testing-using-docker.html
-# http://jmeter.apache.org/usermanual/get-started.html#options
+version: "3.8"
 
 services:
-  jmeter-node01:
-    container_name: jmeter-node01
-    image: apolloclark/jmeter-node
-    ports:
-      - 1099
-      - 50000
-    volumes:
-      - /input_data
-      - /logs
-  jmeter-node02:
-    container_name: jmeter-node02
-    image: apolloclark/jmeter-node
-    ports:
-      - 1099
-      - 50000
-    volumes:
-      - /input_data
-      - /logs
-  jmeter-node03:
-    container_name: jmeter-node03
-    image: apolloclark/jmeter-node
-    ports:
-      - 1099
-      - 50000
-    volumes:
-      - /input_data
-      - /logs
-  jmeter-master:
+  
+  slave:
+    image: vinsdocker/jmserver:latest    
+    #container_name: jmeter-slave
+    #script:
+      # Generate random number from 1 to 10:
+    #  - let MR_ID=$((1 + RANDOM % 10))
+    depends_on:
+      - master   
+
+  master:
+    image: vinsdocker/jmmaster:latest 
     container_name: jmeter-master
-    image: apolloclark/jmeter-master
     ports:
-      - 60000
-    volumes:
-      - ./jmeter-master/scripts:/scripts
-      - ./jmeter-master/logs:/logs
-    entrypoint:
-      - /var/lib/apache-jmeter/bin/jmeter
-      - -n
-      - -t
-      - /scripts/test_google.jmx
-      - -l
-      - /logs/results.csv
-      - -j
-      - /logs/jmeter.log
-      - -LDEBUG
-      # - -R 172.18.0.2,172.18.0.3,172.18.0.4
+      - "60000:60000"
+
